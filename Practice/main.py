@@ -1,8 +1,6 @@
-from flask import Flask, request,
-from flask_wtf import Form
-from flask_bootstrap import Bootstrap
+from flask import Flask, request
+
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
 
 @app.route('/')
 def index():
