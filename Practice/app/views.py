@@ -5,13 +5,13 @@ from .forms import CalculatorForm
 @app.route('/')
 @app.route('/index')
 def index():
-    return 'Hello Jake!'
+    return render_template('index.html', title = 'Home Page')
 
 @app.route('/calculator', methods=['GET', 'POST'])
 def calculator():
     form = CalculatorForm()
     if form.validate_on_submit():
-        flash('Succesfully received form data. %s + %s  = %s'%(form.number1.data, form.number2.data, form.number1.data+form.number2.data))
+        flash('Succesfully received form data. %s + %s + %s = %s'%(form.number1.data, form.number2.data, form.number3.data, form.number1.data+form.number2.data+form.number3.data))
     return render_template('calculator.html',
                            title='Calculator',
                            form=form)
