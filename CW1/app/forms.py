@@ -6,3 +6,7 @@ class CalculatorForm(FlaskForm):
     number1 = IntegerField ('number1', validators= [InputRequired()])
     number2 = IntegerField ('number2', validators=[InputRequired()])
     number3 = IntegerField ('number3', validators=[InputRequired()])
+
+class ToDoList(FlaskForm):
+    description =  StringField ('description', validators= [InputRequired()])
+    priority = BooleanField ('priority')

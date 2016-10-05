@@ -15,3 +15,11 @@ def calculator():
     return render_template('calculator.html',
                            title='Calculator',
                            form=form)
+
+@app.route('/newtask', methods=['GET','POST'])
+def newTask():
+    return 'Create a New Task Here'
+
+@app.route('/viewtask')
+def viewTask():
+    return 'VIEW TASKS'
