@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class = "container">
+<form action="" method=post>
+    <h2>{%- if todo is defined %} Edit {% else %} Create new {% endif -%}Todo</h2>
+        <div class="control-group">
+            <hr>
+            <div class="control-group">
+                <div class="input-field col-md-4">
+                    <select class="browser-default" name="priority" required title="select">
+                        {% for priority in priorities %}
+                                <option value="{{ priority.id }}" {% if todo is defined %}{% if todo.priority_id == priority.id %} 
+                                        selected {% endif %}{% endif %}>{{ priority.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            #}
+            <hr>
+            <div class="input-field col-md-6">
+                <div class="controls">
+                    <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        maxlength="60"
+                        class="form-control input-xlarge"
+                        placeholder="Describe TODO"
+                        {% if todo is defined -%}
+                            value="{{ todo.description }}"
+                        {% endif -%}
+                        required
+                      />
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">
+                    {% if todo %}
+                        Save
+                    {% else %}
+                        Create Todo
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+    </div>
+{% endblock %}
