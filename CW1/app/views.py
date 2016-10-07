@@ -5,7 +5,7 @@ from .forms import *
 
 
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def list_all():
     return render_template(
         'list.html',
@@ -25,8 +25,7 @@ def calculator():
 @app.route('/newTask', methods=['GET', 'POST'])
 def new():
     if request.method == 'POST':
-        priority = Priority.query.filter_by(id=request.form['priority']).first()
-        todo = ToDo(priority=priority, description=request.form['description'])
+        todo = ToDo(description=request.form['description'])
         db.session.add(todo)
         db.session.commit()
         return redirect('/')
@@ -34,7 +33,6 @@ def new():
         return render_template(
             'new-task.html',
             page='new-task',
-            priorities=Priority.query.all()
         )
 
 

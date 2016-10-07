@@ -9,7 +9,6 @@
                     <tr>
                         <th>#</th>
                         <th>Description</th>
-                        <th>Priority</th>
                         <th>Creation Date</th>
                         <th>Actions</th>
                     </tr>
@@ -18,7 +17,6 @@
                             <td> {{ loop.index }} </td>
                             <td {% if todo.is_done %}style="text-decoration:line-through"{% endif %}>
                                 {{ todo.description }}</td>
-                            <td>{{ todo.priority.name }}</td>
                             <td>{{ todo.creation_date }}</td>
                         </tr>
                     {%- endfor %}
