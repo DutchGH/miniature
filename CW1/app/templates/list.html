@@ -10,7 +10,7 @@
                         <th>#</th>
                         <th>Description</th>
                         <th>Creation Date</th>
-                        <th>Actions</th>
+                        <th>Done?</th>
                     </tr>
                     {%- for todo in todos %}
                         <tr {%  if todo.is_done %} class ="success" {% endif %}>
@@ -18,6 +18,9 @@
                             <td {% if todo.is_done %}style="text-decoration:line-through"{% endif %}>
                                 {{ todo.description }}</td>
                             <td>{{ todo.creation_date }}</td>
+                        <td><form id=isdone action="{{ url_for('mark_done', todo_id=todo.id) }}" method="post">
+                                <p onclick="{{ todo.is_done }} = True " class="btn btn-xs btn-default" id="mark_done"{% if todo.is_done %} disabled{% endif %}>Done</p>
+                            </form><td>
                         </tr>
                     {%- endfor %}
                 </table>

@@ -35,7 +35,15 @@ def new():
             page='new-task',
         )
 
+@app.route('/mark-done/<int:todo_id>', methods=['POST'])
+def mark_done(todo_id):
+    if request.method == 'POST':
+        todo = Todo.query.get(todo_id)
+        todo.is_done = True
+        db.session.commit()
+        return redirect('/')
 
-@app.route('/viewtask')
+
+@app.route('/viewcomplete')
 def viewTask():
     return 'VIEW TASKS'
