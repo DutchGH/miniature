@@ -12,7 +12,6 @@ def list_all():
         todos=ToDo.query.all() #primaryJoin(Priority).order_by(Priority.value.desc())
     )
 
-
 @app.route('/calculator', methods=['GET', 'POST'])
 def calculator():
     form = CalculatorForm()
@@ -35,13 +34,12 @@ def new():
             page='new-task',
         )
 
-@app.route('/mark-done/<int:todo_id>', methods=['POST'])
-def mark_done(todo_id):
-    if request.method == 'POST':
-        todo = Todo.query.get(todo_id)
-        todo.is_done = True
-        db.session.commit()
-        return redirect('/')
+@app.route('/edit_db/<id>')
+def editDB(id):
+    x = ToDo.query.get(id)
+    x.is_done = True
+    db.session.commit()
+    return redirect('/')
 
 
 @app.route('/viewcomplete')

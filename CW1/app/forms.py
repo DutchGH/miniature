@@ -9,4 +9,4 @@ class CalculatorForm(FlaskForm):
 
 class ToDoList(FlaskForm):
     description =  StringField ('description', validators= [InputRequired()])
-    priority = BooleanField ('priority')
+    is_done = BooleanField ('is_done')
