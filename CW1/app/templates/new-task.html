@@ -1,32 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
     <div class = "container">
-<form action= "" method= "post">
+<form action= "" method= "post" class="col s12">
     <h2>Create new Todo</h2>
-            <div class="input-field col-md-6">
-                <div class="controls">
-                    
-                    <input
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea
                         type="text"
                         id="description"
                         name="description"
                         maxlength="60"
-                        class="form-control input-xlarge"
-                        placeholder="Describe TODO"
+                        class="materialize-textarea"
+                        placeholder="Enter Description Here"
                         {% if todo is defined -%}
                             value="{{ todo.description }}"
                         {% endif -%}
-                        required
-                      />
+                        required></textarea>
                 </div>
             </div>
-        <div class="control-group">
-            <div class="controls">
+            <div class="row">
                 <button type="submit" class="btn btn-success">
                     Create Todo
                 </button>
             </div>
-        </div>
     </form>
     </div>
 {% endblock %}

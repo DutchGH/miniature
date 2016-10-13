@@ -9,7 +9,7 @@ from .forms import *
 def list_all():
     return render_template(
         'list.html',
-        todos=ToDo.query.all() #primaryJoin(Priority).order_by(Priority.value.desc())
+        todos=ToDo.query.filter_by(is_done = False).all() #primaryJoin(Priority).order_by(Priority.value.desc())
     )
 
 @app.route('/calculator', methods=['GET', 'POST'])
@@ -37,11 +37,19 @@ def new():
 @app.route('/edit_db/<id>')
 def editDB(id):
     x = ToDo.query.get(id)
-    x.is_done = True
-    db.session.commit()
-    return redirect('/')
+    if x.is_done == False:
+        x.is_done = True
+        db.session.commit()
+        return redirect('/')
+    else:
+        x.is_done = False
+        db.session.commit()
+        return redirect('/')
 
 
 @app.route('/viewcomplete')
 def viewTask():
-    return 'VIEW TASKS'
+        return render_template(
+        'list.html',
+        todos=ToDo.query.filter_by(is_done = True).all() #primaryJoin(Priority).order_by(Priority.value.desc())
+    )

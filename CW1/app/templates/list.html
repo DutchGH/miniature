@@ -19,9 +19,6 @@
                             {% if todo.is_done == False %}
                                 <a href = "edit_db/{{todo.id}}">
                                 <button type="submit" id=" {{todo.id}}" href="edit_db/{{todo.id}}" class="waves-effect waves-light btn">Mark As Done</button></a>
-                            {% else %}
-                                <a href = "edit_db/{{todo.id}}">
-                                <button type="submit" id=" {{todo.id}}" href="edit_db/{{todo.id}}" class="waves-effect waves-light btn">Undo</button></a>
                             {% endif %}
                             <td>
                     {%- endfor %}
