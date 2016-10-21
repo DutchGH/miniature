@@ -7,19 +7,26 @@
                 <h3>To Do</h3>
                 <table id = "todo-table" class = "table">
                     <tr>
+                        <th>Name</th>
                         <th>Description</th>
                         <th>Creation Date</th>
                         <th>Action</th>
                     </tr>
                     {%- for todo in todos %}
                         <tr>
+                            <td {% if todo.is_done == True %} style="text-decoration: line-through;" {% endif %}>{{ todo.name }} </td>
                             <td {%if todo.is_done == True %} style="text-decoration: line-through;" {% endif %}>{{ todo.description }}</td>
                             <td>{{ todo.creation_date }}</td>
                             <td>
                             {% if todo.is_done == False %}
                                 <a href = "edit_db/{{todo.id}}">
                                 <button type="submit" id=" {{todo.id}}" href="edit_db/{{todo.id}}" class="waves-effect waves-light btn">Mark As Done</button></a>
+                            {% else %}
+                                <a href = "delete_db/{{todo.id}}">
+                                <button type="submit" id=" {{todo.id}}" href="delete_db/{{todo.id}}" class="waves-effect waves-light btn red accent-4">Delete</button></a>
+
                             {% endif %}
+
                             <td>
                     {%- endfor %}
                 </table>

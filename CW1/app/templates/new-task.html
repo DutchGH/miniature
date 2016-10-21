@@ -2,26 +2,44 @@
 {% block content %}
     <div class = "container">
 <form action= "" method= "post" class="col s12">
-    <h2>Create new Todo</h2>
+    <h2 class = "col s12">Create new Todo</h2>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        maxlength="60"
+                        class="input-field validate"
+                        placeholder="Name"
+                        {% if todo is defined -%}
+                            value="{{ todo.name }}"
+                        {% endif -%}
+                        required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input
                         type="text"
                         id="description"
                         name="description"
                         maxlength="60"
-                        class="materialize-textarea"
+                        class="input-field validate"
                         placeholder="Enter Description Here"
                         {% if todo is defined -%}
                             value="{{ todo.description }}"
                         {% endif -%}
-                        required></textarea>
+                        required>
                 </div>
             </div>
             <div class="row">
+            <div class = "col s12">
                 <button type="submit" class="btn btn-success">
                     Create Todo
                 </button>
+                </div>
             </div>
     </form>
     </div>
