@@ -7,7 +7,8 @@ from .forms import *
 def list_all():
     return render_template(
         'list.html',
-        todos=ToDo.query.filter_by(is_done = False).all() 
+        todos=ToDo.query.filter_by(is_done = False).all() ,
+        title = "ToDo - Tasks To Complete"
     )
 
 
@@ -24,7 +25,8 @@ def new():
         return render_template(
             'new-task.html',
             page='new-task',
-            form = form
+            form = form,
+            title = "ToDo - Create New Task"
         )
 
 @app.route('/edit_db/<id>')
@@ -51,5 +53,6 @@ def deleteDB(id):
 def viewTask():
         return render_template(
         'list.html',
-        todos=ToDo.query.filter_by(is_done = True).all() #primaryJoin(Priority).order_by(Priority.value.desc())
+        todos=ToDo.query.filter_by(is_done = True).all(), #primaryJoin(Priority).order_by(Priority.value.desc())
+        title = "ToDo - Completed Tasks"
     )

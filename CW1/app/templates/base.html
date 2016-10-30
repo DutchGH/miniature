@@ -1,10 +1,11 @@
 {% extends "material/base.html" %}
 {% block title %} {% if title %} {{title}}{% else %} Jacob's Web App{% endif %} {% endblock %}
 {%  block navbar %}
-     <nav class = light-blue>
+    <nav class = light-blue>
     <div class="container nav-wrapper">
       <a href="/" class="brand-logo">To Do App</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/".html">View Pending Tasks</a></li>
         <li><a href="/newTask">Create a New Task</a></li>
         <li><a href="/viewcomplete">View Complete Tasks</a></li>
       </ul>
@@ -12,9 +13,6 @@
   </nav>
 {%  endblock %}
 {% block scripts %}
-    <script>
-        $('select').material_select();
-    </script>
     <script>
         $(document).ready(function () {
             $('.selectpicker').selectpicker();
