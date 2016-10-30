@@ -13,8 +13,10 @@ def list_all():
 
 @app.route('/newTask', methods=['GET', 'POST'])
 def new():
-    if request.method == 'POST':
-        todo = ToDo(name=request.form['name'],description=request.form['description'])
+    form = ToDoList()
+
+    if form.validate_on_submit():
+        todo = ToDo(name=form.name.data ,description= form.description.data)
         db.session.add(todo)
         db.session.commit()
         return redirect('/')
@@ -22,6 +24,7 @@ def new():
         return render_template(
             'new-task.html',
             page='new-task',
+            form = form
         )
 
 @app.route('/edit_db/<id>')

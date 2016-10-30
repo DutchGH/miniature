@@ -2,38 +2,25 @@
 {% block content %}
     <div class = "container">
 <form action= "" method= "post" class="col s12">
+    {{ form.hidden_tag() }}
     <h2 class = "col s12">Create new Todo</h2>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        maxlength="60"
-                        class="input-field validate"
-                        placeholder="Name"
-                        {% if todo is defined -%}
-                            value="{{ todo.name }}"
-                        {% endif -%}
-                        required>
+            <div class = "row">
+                <div class = "col s6">
+                                    <label for="name">Name</label>
+
+                    <p name = "name">{{ form.name(placeholder="Insert Name of Task Here!") }}</p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="input-field col s12">
-                    <input
-                        type="text"
-                        id="description"
-                        name="description"
-                        maxlength="60"
-                        class="input-field validate"
-                        placeholder="Enter Description Here"
-                        {% if todo is defined -%}
-                            value="{{ todo.description }}"
-                        {% endif -%}
-                        required>
+            <div class = "row">
+                <div class = "col s6">
+                    <label for="description">Description</label>
+                    <p name = "description"> {{form.description(placeholder="Insert Description Here!")}} </p>
                 </div>
             </div>
+
+
+
             <div class="row">
             <div class = "col s12">
                 <button type="submit" class="btn btn-success">
