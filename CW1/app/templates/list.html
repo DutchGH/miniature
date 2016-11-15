@@ -5,6 +5,7 @@
             <div class = "l6 offset-l3">
                 {%  if todos|count > 0 %}
                 <h3 class = "center-align">To Do</h3>
+                <!-- Table Contents Here -->
                 <table id = "todo-table">
                     <thead>
                     <tr>
@@ -15,6 +16,7 @@
                     </tr>
                     <thead>
                     {%- for todo in todos %}
+                        <!-- Loop through all elements in DB -->
                         <tr>
                             <td {% if todo.is_done == True %} style="text-decoration: line-through;" {% endif %}>{{ todo.name }} </td>
                             <td {%if todo.is_done == True %} style="text-decoration: line-through;" {% endif %}>{{ todo.description }}</td>
@@ -26,7 +28,6 @@
                             {% else %}
                                 <a href = "delete_db/{{todo.id}}">
                                 <button type="submit" id=" {{todo.id}}" href="delete_db/{{todo.id}}" class="waves-effect waves-light btn red accent-4">Delete</button></a>
-
                             {% endif %}
 
                             </td>
