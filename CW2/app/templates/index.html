@@ -3,9 +3,22 @@
         <div class="container">
             <div class="row">
                 <div class="text-center">
-                        <h1>JAPHABytes</h1>
-                        <hr class="small">
-                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    <h1>minatu.re</h1>
+                    <span class="subheading"><i>"The world's crappiest URL Shortener" - PC World</i></span>
+                </div>
+                <hr class="small">
+                <div class = "row">
+                    <div class = "text-center">
+                        <h2>Place Shortened Links Here:</h2>
+                    </div>
+                    <br>
+                    <div class="col-md-4 col-md-offset-4">
+                    <form action = "" method = "post" name = "shortener">
+                    {{form.hidden_tag()}}
+                    <p>{{form.longURL}}<br></p>
+                    <p><input type = "submit" value = "shorten"></p>
+                    </form>
+                    </div>
                 </div>
             </div>
         </div>

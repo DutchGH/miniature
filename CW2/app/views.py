@@ -7,4 +7,9 @@ from .forms import *
 def list_all():
     return render_template(
         'index.html',
-         title = "JAPHABYTES - MAIN")
+        form=shortenerForm())
+
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+	return 'LOGIN HERE YOU BUM'
