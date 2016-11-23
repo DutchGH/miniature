@@ -6,4 +6,5 @@ from .forms import *
 @app.route('/', methods = ['GET', 'POST'])
 def list_all():
     return render_template(
-        'list.html',)
+        'index.html',
+         title = "JAPHABYTES - MAIN")
