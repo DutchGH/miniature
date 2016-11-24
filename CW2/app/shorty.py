@@ -3,16 +3,16 @@ import string
 
 from app import db
 from app.models import url
-from flask import requests
+from flask import request
 from urllib.request import HTTPError, Request, urlopen 
 
 def random_string(size):
-	random_string = ''.join(random.choce(string.ascii_letters + string.digits) 
+	random_string = ''.join(random.choice(string.ascii_letters + string.digits) 
 		for x in range(size))
 	return random_string
 
 
-def shorty(long_url)
+def shorty(long_url):
 	longurl_query = url.query.filter_by(long_url = long_url).first()
 	if longurl_query is None:
 		for x in range(6,11):
