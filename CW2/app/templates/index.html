@@ -6,22 +6,51 @@
                     <h1>minatu.re</h1>
                     <span class="subheading"><i>"The world's crappiest URL Shortener" - PC World</i></span>
                 </div>
-                <hr class="small">
-                <div class = "row">
-                    <div class = "text-center">
-                        <h2>Place Shortened Links Here:</h2>
-                    </div>
-                    <br>
-                    <div class="col-md-4 col-md-offset-4">
+            </div>
+            
+            <hr class="small">
+            
+            <div class = "row">
+                <div class = "text-center">
+                    <h2>Place Shortened Links Here:</h2>
+                </div>
+
+                <br>
+
+                <div class="col-md-4 col-md-offset-4">
                     <form action = "" method = "post" name = "shortener" class = "form form-horizontal" role = "form">
-                    {{form.hidden_tag()}}
-                    {{ form.longURL(placeholder="Type/Paste In a URL", class="form-control")}}
-                    <br>
-                    <button type="submit" class="btn btn-primary center-block">Shorten!</button>
+                        {{form.hidden_tag()}}
+                        {{ form.longURL(placeholder="Type/Paste In a URL", class="form-control")}}
+                        <br>
+                        <button type="submit" class="btn btn-primary center-block">Shorten!</button>
                     </form>
-                    </div>
                 </div>
             </div>
+
+            <br> 
+            <div class = "row">
+                {% if short_url %}
+                <div class = "text-center">
+                <h4 style = "font-weight:  800"> Your minatu.re URL:</h4>
+                <br>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="input-group">
+                    <input type="url" class="form-control" value="{{short_url}}" id="clipboard" >
+                    <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" data-clipboard-target="#clipboard"><span id="clipboard" class="glyphicon glyphicon-copy" aria-hidden="true"></span> Copy!</button>
+                    </span>
+                </div>
+                </div>
+                {% endif %}
+            </div>
+
         </div>
     </header>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/clipboard.min.js')}}"> </script>
+    <script src="{{url_for('static', filename='js/custom.min.js')}}"> </script>
+
 {% endblock %}

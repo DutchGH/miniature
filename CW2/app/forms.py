@@ -5,3 +5,7 @@ from wtforms.validators import url
 
 class shortenerForm(FlaskForm):
 	longURL = URLField('url', validators = [url()])
+
+# class loginForm(FlaskForm):
+# 	user_name
+# 	password
