@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, request, abort
+from flask.ext.login import login_user
 from .models import *
 from app import app
 from .shorty import *
@@ -31,6 +32,22 @@ def moveToURL(short_url):
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-	return 'LOGIN HERE YOU BUM'
+	error = None
+	form = loginForm(request.form)
+	if request.method == 'POST':
+		if form.validate_on_submit():
+			username = User.query.filter_by(user_name = request.form['username']).first()
+			if User is not None and User.password == request.form['password']:
+				login_user(user)
+				flash('You were logged in.')
+				return redirect('/')
+			else:
+				error = 'Invalid Credentials'
+	return render_template('login.html', form = form, error = error)
+
+
+@app.route('/logout')
+def logout():
+	return 'GET OUT'
 
 
