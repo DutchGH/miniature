@@ -23,3 +23,4 @@ class RegistrationForm(FlaskForm):
 class loginForm(FlaskForm):
 	username = StringField('username', [validators.Length(min=4, max=25), validators.DataRequired()])
 	password = PasswordField('password', [validators.DataRequired()])
+	remember_me = BooleanField('remember_me', default=False)
