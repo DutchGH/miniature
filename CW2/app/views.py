@@ -48,6 +48,26 @@ def moveToURL(short_url):
 	else:
 		return redirect(shorturl_query.long_url)
 
+@app.route('/createprofile', methods = ['GET', 'POST'])
+def create():
+	form = RegistrationForm()
+	if request.method == 'POST':
+		if form.validate_on_submit():
+			first =  form.first_name.data
+			last = form.last_name.data
+			username = form.username.data
+			email = form.email.data
+			password = form.password.data
+			confirm = form.confirm.data
+			data = User(user_name = username, email = email, password = password, first_name = first, last_name = last)
+			db.session.add(data)
+			db.session.commit()
+			return redirect ('/')
+		else:
+			return render_template('signup.html', form = form)
+	return render_template('signup.html', form = form)
+
+
 @app.route('/profile/<nickname>')
 @login_required
 def profile(nickname):
