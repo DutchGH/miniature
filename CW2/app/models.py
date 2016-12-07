@@ -5,11 +5,16 @@ from sqlalchemy.orm import relationship
 
 
 #Association, so that a generated URL can have owenership by multiple users (being the 'children' of the URL)
-class Association(db.Model):
-	__tablename__ = 'association'
-	url_id = db.Column(db.Integer, db.ForeignKey('url.id'), primary_key = True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
-	child = relationship("url_table")
+usergen = db.Table('usergen',
+    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
+    db.Column('url_table_id', db.Integer, db.ForeignKey('url_table.id'))
+)
+
+# class Association(db.Model):
+# 	__tablename__ = 'association'
+# 	url_id = db.Column(db.Integer, db.ForeignKey('url.id'), primary_key = True)
+# 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
+# 	child = relationship("url_table")
 
 
 #Table to store the shortened URLS and its corresponding parent URLS
@@ -18,9 +23,6 @@ class url_table(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
     short_url = db.Column('url', db.String(100))
     long_url = db.Column(db.Text)
-
-    children = relationship("Association")
-
 
     def __init__(self, short_url, long_url):
         self.short_url = short_url
@@ -36,6 +38,8 @@ class User(db.Model):
 	password = db.Column(db.String(500))
 	first_name = db.Column(db.String(500))
 	last_name = db.Column(db.String(500))
+
+	generated_links = db.relationship('User', secondary=url_table,primaryjoin=(usergen.c.user_id == id), secondaryjoin=(usergen.c.url_table_id == id), backref=db.backref('usergen', lazy='dynamic'),lazy='dynamic')
 
 	def is_authenticated(self):
 		return True
