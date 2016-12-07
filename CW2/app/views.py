@@ -75,11 +75,15 @@ def profile(nickname):
 	if user == None:
 		flash('User %s not found.' % nickname)
 		return redirect(url_for('index'))
-	return user.user_name
+	return render_template('profile.html', user = user)
 
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+	if g.user.is_authenticated:
+		flash('You are already logged in. Please logout to login')
+		return redirect('/')
+	
 	error = None
 	form = loginForm(request.form)
 	if request.method == 'POST':

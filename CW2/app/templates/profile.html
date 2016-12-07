@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h1>minatu.re</h1>
+                    <span class="subheading"><i>"The world's crappiest URL Shortener" - PC World</i></span>
+                </div>
+            </div>
+            
+            <hr class="small">
+            
+            <div class = "row">
+                <div class = "text-center">
+                    <h2>Welcome {{user.first_name}} {{user.last_name}}!</h2>
+                    <h2>{{user.user_name}}'s Links:<h2>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/clipboard.min.js')}}"> </script>
+    <script src="{{url_for('static', filename='js/custom.min.js')}}"> </script>
+
+{% endblock %}

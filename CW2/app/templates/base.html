@@ -4,7 +4,7 @@
 {% block styles %}
 {{super()}}
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="static/jhmod.css">
+<link rel="stylesheet" type="text/css" href= {{url_for('static', filename='jhmod.css')}}
 {% endblock %}
 
 {%  block navbar %}
@@ -26,14 +26,11 @@
                         <a href="/">URL Shortener</a>
                     </li>
                     <li>
-                        <a href="/login">My links</a>
+                         {% if g.user.is_authenticated %}<a href="{{ url_for('profile', nickname = g.user.user_name) }}">My Profile</a>{% endif %}
                     </li>
                      <li>
-                        {% if user %}<a href="/logout">Logout</a>{% else %}
+                        {% if g.user.is_authenticated %}<a href="/logout">Logout</a>{% else %}
                         <a href="/login">Login</a> {%endif%}
-                    </li>
-                    <li>
-                         {% if g.user.is_authenticated %}<a href="{{ url_for('profile', nickname = g.user.user_name) }}">{{user.user_name}}</a>{% endif %}
                     </li>
                 </ul>
             </div>
