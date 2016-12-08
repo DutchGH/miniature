@@ -16,6 +16,22 @@
                     <h2>{{user.user_name}}'s Links:<h2>
                 </div>
             </div>
+             <div class = "row">
+                  <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Original URL</th>
+                            <th>minatu.re'd URL</th>
+                          </tr>
+                        </thead>
+                    {% for post in posts %}
+                    <tr>
+                    <td><a href = "{{post.long_url}}">{{post.long_url}}</a></td>
+                    <td><a href = "{{request.url_root}}{{post.short_url}}">{{request.url_root}}{{post.short_url}}</a></td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
 
 {% endblock %}
 

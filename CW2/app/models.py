@@ -58,6 +58,10 @@ class User(db.Model):
 			self.generated.append(genURL)
 			return self
 
+	def generated_links(self):
+		return url_table.query.join(
+			gens,(gens.c.url_id == url_table.id)).filter(gens.c.generator_id == self.id).all()
+
 
 
 

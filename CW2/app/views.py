@@ -72,10 +72,11 @@ def create():
 @login_required
 def profile(nickname):
 	user = User.query.filter_by(user_name = nickname).first()
+	posts = g.user.generated_links()
 	if user == None:
 		flash('User %s not found.' % nickname)
 		return redirect(url_for('index'))
-	return render_template('profile.html', user = user)
+	return render_template('profile.html', user = user, posts = posts)
 
 
 @app.route('/login', methods = ['GET', 'POST'])
