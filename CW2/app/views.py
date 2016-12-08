@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, request, abort, g 
+from flask import render_template, flash, redirect, request, abort, g, Markup
 from flask_login import login_user, current_user, logout_user, login_required
 from .models import *
 from app import app, lm
@@ -93,11 +93,22 @@ def login():
 			if username is not None and (username.password == request.form['password']):
 				login_user(username)
 				#session['logged_in'] = True
-				flash('You were logged in.')
+				flash(Markup('You were logged in. Wrong User? <a href = "/logout">Click Here<a>'))
 				return redirect('/')
 			else:
 				error = 'Invalid Credentials'
 	return render_template('login.html', form = form, error = error)
+
+@app.route('/editprofile/<id>', methods = ['GET', 'POST'])
+@login_required
+def editprofile(id):
+    #Get the ID of the database entry and alter it's is done var - refresh page
+    x = ToDo.query.get(id)
+    if x.is_done == False:
+        x.is_done = True
+        db.session.commit()
+        return redirect('/')
+
 
 
 @app.route('/logout')

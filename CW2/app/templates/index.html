@@ -44,9 +44,13 @@
                 </div>
                 {% endif %}
             </div>
+            <div class = "col-md-4 col-md-offset-4">
             {% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}
+            <div class="alert alert-info text-center" role="alert">
+            {{ message }}
+            </div>
+            {% endfor %}
+            </div>
         </div>
 
 {% endblock %}
