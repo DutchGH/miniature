@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, request, abort, g, Markup
+from flask import render_template, flash, redirect, request, abort, g, Markup, url_for
 from flask_login import login_user, current_user, logout_user, login_required
 from .models import *
 from app import app, lm
@@ -75,7 +75,7 @@ def profile(nickname):
 	posts = g.user.generated_links()
 	if user == None:
 		flash('User %s not found.' % nickname)
-		return redirect(url_for('index'))
+		return redirect('/')
 	return render_template('profile.html', user = user, posts = posts)
 
 
@@ -99,15 +99,30 @@ def login():
 				error = 'Invalid Credentials'
 	return render_template('login.html', form = form, error = error)
 
-@app.route('/editprofile/<id>', methods = ['GET', 'POST'])
+@app.route('/editprofile', methods = ['GET', 'POST'])
 @login_required
-def editprofile(id):
+def editprofile():
     #Get the ID of the database entry and alter it's is done var - refresh page
-    x = ToDo.query.get(id)
-    if x.is_done == False:
-        x.is_done = True
-        db.session.commit()
-        return redirect('/')
+    x = User.query.get(g.user.id)
+    form = editForm()
+    if request.method == 'POST':
+    	if form.validate_on_submit():
+		    new_first = form.new_first_name.data
+		    new_last = form.new_last_name.data
+		    old_password = form.old_password.data
+		    new_password = form.password.data
+		    confirm = form.confirm.data
+		    if new_first is not '':
+		    	x.first_name = new_first
+		    if new_last is not '':
+		    	x.last_name = new_last
+		    if new_password is not None and new_password == confirm and old_password == x.password:
+		    	x.password = new_password
+		    db.session.commit()
+		    flash("Your Profile Has Been Updated")
+		    return redirect(url_for('profile', nickname = g.user.user_name))
+    return render_template('edit.html', form = form)
+    
 
 
 

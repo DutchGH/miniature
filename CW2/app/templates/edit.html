@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h1>minatu.re</h1>
+                    <span class="subheading"><i>Update Your Profile</i></span>
+                </div>
+            </div>
+            
+            <hr>
+
+                <div class="col-md-8 col-md-offset-2">
+                    <form action = "" method = "post" name = "shortener" class = "form form-horizontal" role = "form">
+                    <div class = "form-group">
+                        {{form.hidden_tag()}}
+                        <div class="col-md-6">
+                        {{ form.new_first_name(placeholder="First Name", class="form-control")}} <br>
+                        </div>
+                        <div class="col-md-6">
+                        {{ form.new_last_name(placeholder="Last Name", class="form-control")}}
+                        </div>
+                        <br>
+                        </div>
+                    <div class = "form-group">
+                        <div class="col-md-6">
+                        {{ form.old_password(placeholder="Enter Old Password", class="form-control")}}
+                        <br>
+                        </div>
+                        <div class="col-md-6">
+                        {{ form.password(placeholder="Password", class="form-control")}}
+                        <br>
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                        {{ form.confirm(placeholder="Confirm New Password", class="form-control")}}
+                        </div>
+                        <br>
+                    </div>
+                        <br>
+                        <div class = "form-group">
+                        <div class = "col-md-2">
+                        <button type="submit" class="btn btn-danger center-block" href = "{{url_for('profile', nickname = g.user.user_name)}}">Go Back</button>
+                        <br>
+                        </div>
+                        <div class = "col-md-8">
+                        <button type="submit" class="btn btn-success center-block">Sign Up!</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/clipboard.min.js')}}"> </script>
+    <script src="{{url_for('static', filename='js/custom.min.js')}}"> </script>
+
+{% endblock %}

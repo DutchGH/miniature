@@ -32,7 +32,6 @@ class editForm(FlaskForm):
     new_last_name = StringField('new_last_name')
     old_password = PasswordField('Old Password')
     password = PasswordField('New Password', [
-        validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
