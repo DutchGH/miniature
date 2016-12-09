@@ -62,6 +62,7 @@ def create():
 			data = User(user_name = username, email = email, password = password, first_name = first, last_name = last)
 			db.session.add(data)
 			db.session.commit()
+			flash('Profile Created')
 			return redirect ('/')
 		else:
 			return render_template('signup.html', form = form)
@@ -96,7 +97,7 @@ def login():
 				flash(Markup('You were logged in. Wrong User? <a href = "/logout">Click Here<a>'))
 				return redirect('/')
 			else:
-				error = 'Invalid Credentials'
+				flash('Invalid Credentials. Please Try Again')
 	return render_template('login.html', form = form, error = error)
 
 @app.route('/editprofile', methods = ['GET', 'POST'])
@@ -121,6 +122,7 @@ def editprofile():
 		    db.session.commit()
 		    flash("Your Profile Has Been Updated")
 		    return redirect(url_for('profile', nickname = g.user.user_name))
+	    flash("There was a problem updating your credentials. Try again.")
     return render_template('edit.html', form = form)
     
 

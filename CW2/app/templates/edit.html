@@ -41,15 +41,24 @@
                         <br>
                         <div class = "form-group">
                         <div class = "col-md-2">
-                        <button type="submit" class="btn btn-danger center-block" href = "{{url_for('profile', nickname = g.user.user_name)}}">Go Back</button>
+                        <button type="submit" class="btn btn-danger center-block" href = "{{url_for('profile', nickname = g.user.user_name)}}">Back</button>
                         <br>
                         </div>
                         <div class = "col-md-8">
-                        <button type="submit" class="btn btn-success center-block">Sign Up!</button>
+                        <button type="submit" class="btn btn-success center-block">Make Changes</button>
                         </div>
                         </div>
                     </form>
                 </div>
+                <div class = "row">
+             <div class = "col-md-4 col-md-offset-4">
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger text-center" role="alert">
+            {{ message }}
+            </div>
+            {% endfor %}
+            </div>
+            </div>
             </div>
 {% endblock %}
 

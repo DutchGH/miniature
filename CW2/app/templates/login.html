@@ -23,7 +23,17 @@
                     <p>Don't have an account? <a href="/createprofile">Create One.</a></p>
                     </div>
                 </div>
+                <div class = "row">
+                 <div class = "col-md-4 col-md-offset-4">
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger text-center" role="alert">
+            {{ message }}
             </div>
+            {% endfor %}
+            </div>
+            </div>
+            </div>
+
 {% endblock %}
 
 {% block scripts %}
